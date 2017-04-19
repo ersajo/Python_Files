@@ -8,7 +8,7 @@ while True:
     client.send(mensaje)
     if mensaje == "close":
         break
-    print client.recv(1024)
+    print client.recv(10)
 print "Adios."
 
 client.close()

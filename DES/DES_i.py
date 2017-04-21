@@ -3,7 +3,7 @@ from Crypto.Cipher import DES
 from Crypto.Util import Counter
 from Crypto import Random
 
-archivo = "winter.bmp"
+archivo = "img.bmp"
 
 def menu():                         #Funcion que simulara el menu en el shell
     os.system('clear')              #Limpiamos pantalla del shell

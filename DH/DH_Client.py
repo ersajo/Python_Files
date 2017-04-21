@@ -1,4 +1,24 @@
+import sys
+import random
 import socket
+
+def es_primo(num):
+    i = 1;
+    if num < 2:
+        return False
+    while num % i != 0:
+        i += 1
+        if num % i == 0:
+            return False
+    return True
+
+def genP():
+    while True:
+        ran = str(random.random()).split('.')
+        num = int(ran[1])
+        if es_primo(num):
+            return num
+
 
 client = socket.socket()
 client.connect(('127.0.0.1', 7000))

@@ -9,7 +9,7 @@ while True:
     if recibido == "close":
         break
     print str(addr[0]) + " dice: ", recibido
-    client.sendall("Holo" + str(54))
+    client.sendall("Holo")
 
 print "Adios."
 

@@ -1,7 +1,7 @@
 import socket
 
 client = socket.socket()
-client.connect(('192.168.0.16', 7000))
+client.connect(('127.0.0.1', 7000))
 
 while True:
     mensaje = raw_input("Mensaje a enviar >>")

@@ -19,8 +19,6 @@ def genP():
         if es_primo(num):
             return num
 
-p = genP()
-
 def genA():
     while True:
         ran = str(random.random()).split('.')
@@ -30,18 +28,21 @@ def genA():
             num = int(ran[1])
         if es_primo(num):
             return num
-print p
-print genA()
+
+p = genP()
+p = str(p)[0:8]
+a = genA()
 
 client = socket.socket()
 client.connect(('127.0.0.1', 7000))
-
+print "P: " + p
+client.send(p)
 while True:
     mensaje = raw_input("Mensaje a enviar >>")
     client.send(mensaje)
     if mensaje == "close":
         break
-    print client.recv(1024)
+    #print client.recv(1024)
 print "Adios."
 
 client.close()

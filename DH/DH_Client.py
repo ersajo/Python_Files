@@ -19,6 +19,19 @@ def genP():
         if es_primo(num):
             return num
 
+p = genP()
+
+def genA():
+    while True:
+        ran = str(random.random()).split('.')
+        num = int(ran[1])
+        while num > p:
+            ran = str(random.random()).split('.')
+            num = int(ran[1])
+        if es_primo(num):
+            return num
+print p
+print genA()
 
 client = socket.socket()
 client.connect(('127.0.0.1', 7000))

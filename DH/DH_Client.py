@@ -1,5 +1,5 @@
 import sys
-import random
+from random import random, randrange
 import socket
 
 def es_primo(num):
@@ -14,18 +14,14 @@ def es_primo(num):
 
 def genP():
     while True:
-        ran = str(random.random()).split('.')
+        ran = str(random()).split('.')
         num = int(ran[1])
         if es_primo(num):
             return num
 
 def genA():
     while True:
-        ran = str(random.random()).split('.')
-        num = int(ran[1])
-        while num > p:
-            ran = str(random.random()).split('.')
-            num = int(ran[1])
+        num = randrange(int(p))
         if es_primo(num):
             return num
 
@@ -36,6 +32,7 @@ a = genA()
 client = socket.socket()
 client.connect(('127.0.0.1', 7000))
 print "P: " + p
+print "A: " + str(a)
 client.send(p)
 while True:
     mensaje = raw_input("Mensaje a enviar >>")

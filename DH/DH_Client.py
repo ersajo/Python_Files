@@ -4,11 +4,10 @@ import socket
 
 def exp(num, exp, res, mod):
     if exp == 0:
-        return res
+        return True
     else:
         res = (res * num) % mod
-        exp -= 1
-        exp(num, exp, res, mod)
+        exp(num, exp-1, res, mod)
 
 def es_primo(num):
     i = 1;

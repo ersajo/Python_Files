@@ -32,24 +32,30 @@ def genP():
 
 p = genP()
 p = str(p)[:8]
-a = str(randrange(int(p)-2))
-g = str(randrange(int(p)))
-ka = exp(int(g),int(a),int(p))
+a = randrange(int(p)-2)
+g = randrange(int(p))
+ka = exp(g,a,int(p))
 
-print "P: " + p
-print "G: " + g
-print "A: " + a
+print "P: " + str(p)
+print "G: " + str(g)
+print "A: " + str(a)
 print "Ka:" + str(ka)
 client = socket.socket()
-client.connect(('127.0.0.1', 7000))
-client.send(p)
-client.send(g)
-while True:
+client.connect(('127.0.0.1', 7500))
+client.send(str(p))
+client.send(str(g))
+client.send(str(ka))
+Kb = client.recv(10)
+print "kb:" + Kb
+
+k = exp(int(Kb),a,int(p))
+print "K: " + str(k)
+"""while True:
     mensaje = raw_input("Mensaje a enviar >>")
     client.send(mensaje)
     if mensaje == "close":
         break
-    #print client.recv(1024)
+    print client.recv(10)"""
 print "Adios."
 
 client.close()

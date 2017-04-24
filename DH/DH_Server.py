@@ -14,7 +14,7 @@ def exp(base, expo, mod):
         return ans
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(('', 7000))
+server.bind(('', 7500))
 server.listen(1)
 client, addr = server.accept()
 
@@ -25,15 +25,21 @@ print "G: " + G
 b = randrange(int(P)-2)
 print "B: " + str(b)
 kb = exp(int(G),b,int(P))
+Ka = client.recv(10)
+print "Ka:" + Ka
 print "Kb:" + str(kb)
+client.sendall(str(kb))
 
-while True:
+k = exp(int(Ka),b,int(P))
+print "K: " + str(k)
+
+
+"""while True:
     recibido = client.recv(1024)
     if recibido == "close":
         break
     print str(addr[0]) + " dice: ", recibido
-    #client.sendall(recibido)
-
+    #client.sendall(str(kb))"""
 print "Adios."
 
 client.close()

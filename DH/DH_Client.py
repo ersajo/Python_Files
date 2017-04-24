@@ -2,12 +2,16 @@ import sys
 from random import random, randrange
 import socket
 
-def exp(num, exp, res, mod):
-    if exp == 0:
-        return True
+def exp(base, expo, mod):
+    ans = 1
+    if expo == 0:
+        ans = 1
     else:
-        res = (res * num) % mod
-        exp(num, exp-1, res, mod)
+        while expo >= 1:
+            ans *= base
+            expo -= 1
+            ans = ans % mod
+        return ans
 
 def es_primo(num):
     i = 1;
@@ -27,16 +31,19 @@ def genP():
             return num
 
 p = genP()
-p = str(p)[0:8]
-a = num = randrange(int(p))
-ka = exp(3,4,1,5)
-print ka
+p = str(p)[:8]
+a = str(randrange(int(p)-2))
+g = str(randrange(int(p)))
+ka = exp(int(g),int(a),int(p))
 
+print "P: " + p
+print "G: " + g
+print "A: " + a
+print "Ka:" + str(ka)
 client = socket.socket()
 client.connect(('127.0.0.1', 7000))
-print "P: " + p
-print "A: " + str(a)
 client.send(p)
+client.send(g)
 while True:
     mensaje = raw_input("Mensaje a enviar >>")
     client.send(mensaje)

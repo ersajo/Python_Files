@@ -18,6 +18,8 @@ server.bind(('', 7500))
 server.listen(1)
 client, addr = server.accept()
 
+
+
 P = client.recv(8)
 G = client.recv(8)
 print "P: " + P

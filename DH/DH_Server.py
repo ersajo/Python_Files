@@ -22,28 +22,32 @@ client, addr = server.accept()
 
 print "Starting conection with: " + addr[0]
 
+print "Receiving P..."
 P = client.recv(8)
-G = client.recv(8)
 print "P: " + P
+
+print "Receiving G..."
+G = client.recv(8)
 print "G: " + G
+
+print "Generating B..."
 b = randrange(int(P)-2)
 print "B: " + str(b)
+
+print "Calculating Kb..."
 kb = exp(int(G),b,int(P))
-Ka = client.recv(10)
-print "Ka:" + Ka
 print "Kb:" + str(kb)
+print "Sending Kb..."
 client.sendall(str(kb))
 
+print "Receiving Ka..."
+Ka = client.recv(10)
+print "Ka:" + Ka
+
+print "Calculating the key..."
 k = exp(int(Ka),b,int(P))
-print "K: " + str(k)
+print "Key: " + str(k)
 
-
-"""while True:
-    recibido = client.recv(1024)
-    if recibido == "close":
-        break
-    print str(addr[0]) + " dice: ", recibido
-    #client.sendall(str(kb))"""
 print "Adios."
 
 client.close()

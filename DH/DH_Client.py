@@ -65,7 +65,7 @@ print "kb:" + Kb
 
 print "Calculating the key..."
 k = exp(int(Kb),a,int(p))
-print "K: " + str(k)
+print "Key: " + str(k)
 
 print "Adios."
 

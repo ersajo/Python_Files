@@ -13,12 +13,14 @@ def exp(base, expo, mod):
             ans = ans % mod
         return ans
 
+print "Starting Server..."
+
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(('', 7500))
 server.listen(1)
 client, addr = server.accept()
 
-
+print "Starting conection with: " + addr[0]
 
 P = client.recv(8)
 G = client.recv(8)

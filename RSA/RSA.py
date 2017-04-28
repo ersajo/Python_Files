@@ -1,16 +1,23 @@
-import sys
 from random import random, randrange
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
 
-def exp(base, expo, mod):
-    ans = 1
-    if expo == 0:
-        ans = 1
-    else:
-        while expo >= 1:
-            ans *= base
-            expo -= 1
-            ans = ans % mod
-        return ans
+def llavePublica():
+    bits=2048
+    new_key = RSA.generate(bits, e=65537)
+    public_key = new_key.publickey().exportKey("PEM")
+    llavePublica = open("llavePublicaCandy.txt", "w")
+    llavePublica.write(public_key)
+    llavePublica.close()
+
+def llavePrivada():
+    bits=2048
+    new_key = RSA.generate(bits, e=65537)
+    public_key = new_key.publickey().exportKey("PEM")
+    private_key = new_key.exportKey("PEM")
+    llavePrivada = open("llavePrivadaCandy.txt","w")
+    llavePrivada.write(private_key)
+    llavePrivada.close()
 
 def es_primo(num):
     i = 1;
@@ -28,12 +35,23 @@ def genP():
         num = int(ran[1])
         if es_primo(num):
             return num
+def gcd(a,b):
+    while b != 0:
+        (a,b) = (a, a % b)
+    return a;
 
-p = genP()
-q = genP()
+def genE():
+    p = genP()
+    q = genP()
+    n = p*q
+    phi = (p-1)*(q-1)
+    e = randrange(n)
+    while(True):
+        if(gcd(e,phi) == 1):
+            break
+        e = randrange(n)
+        print e
+    return e
 
-n = p*q;
-
-print "p: " + str(p)
-print "q: " + str(q)
-print "n: " + str(n)
+llavePrivada()
+llavePublica()

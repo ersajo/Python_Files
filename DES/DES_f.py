@@ -15,7 +15,6 @@ def enc_file(in_filename, out_filename, key):
         with open(out_filename, 'w') as out_file:
             while True:
                 chunk = in_file.read()
-                print "text: " + chunk
                 if len(chunk) == 0:
                     break
                 elif len(chunk) % 16 != 0:

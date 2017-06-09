@@ -17,9 +17,11 @@ def enc_file(in_filename, out_filename, key):
                 chunk = in_file.read()
                 if len(chunk) == 0:
                     break
-                elif len(chunk) % 16 != 0:
-                    chunk += ' ' * (16 - len(chunk) % 16)
-                out_file.write(cipher.encrypt(chunk))
+                elif len(chunk) % 8 != 0:
+                    chunk += ' ' * (8 - len(chunk) % 8)
+                cifrado = cipher.encrypt(chunk)
+                print(len(cifrado))
+                out_file.write(cifrado)
 
 def dec_file(in_filename, out_filename, key):
     cipher = DES.new(key)
@@ -30,7 +32,9 @@ def dec_file(in_filename, out_filename, key):
                 chunk = in_file.read()
                 if len(chunk) == 0:
                     break
-                out_file.write(cipher.decrypt(chunk).strip())
+                descifrado = cipher.decrypt(chunk).strip()
+                print descifrado
+                out_file.write(descifrado)
 
 os.system('clear')
 key = raw_input ("Write a key >> ")
